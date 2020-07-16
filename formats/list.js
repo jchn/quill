@@ -68,8 +68,10 @@ class List extends Container {
       let format = this.statics.formats(domNode);
       let blot = Parchment.find(e.target);
       if (format === 'checked') {
+        e.preventDefault()
         blot.format('list', 'unchecked');
-      } else if(format === 'unchecked') {
+      } else if (format === 'unchecked') {
+        e.preventDefault()
         blot.format('list', 'checked');
       }
     }
@@ -103,9 +105,9 @@ class List extends Container {
     super.optimize(context);
     let next = this.next;
     if (next != null && next.prev === this &&
-        next.statics.blotName === this.statics.blotName &&
-        next.domNode.tagName === this.domNode.tagName &&
-        next.domNode.getAttribute('data-checked') === this.domNode.getAttribute('data-checked')) {
+      next.statics.blotName === this.statics.blotName &&
+      next.domNode.tagName === this.domNode.tagName &&
+      next.domNode.getAttribute('data-checked') === this.domNode.getAttribute('data-checked')) {
       next.moveChildren(this);
       next.remove();
     }
